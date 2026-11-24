@@ -1262,7 +1262,6 @@ a.btn,a.promo-btn{ text-decoration:none; }
 
 /* accordion banners on Data and Insights */
 .theme-block-body::before{ content:''; display:block; height:150px; margin:8px 0 26px; border-radius:18px; background:var(--tb-art) right center/contain no-repeat, color-mix(in srgb,var(--brand-sky) 14%,#fff); }
-.theme-block[data-theme-key="overview"] .theme-block-body::before{ --tb-art:var(--art-data); }
 .theme-block[data-theme-key="employment"] .theme-block-body::before{ --tb-art:var(--art-employment); }
 .theme-block[data-theme-key="entrepreneurship"] .theme-block-body::before{ --tb-art:var(--art-entrepreneurship); }
 .theme-block[data-theme-key="infrastructure"] .theme-block-body::before{ --tb-art:var(--art-infrastructure); }
@@ -1441,7 +1440,6 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
             <svg class="icon chev" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
           </button>
           <div class="mega" id="theme-mega" role="menu">
-            <a href="#" class="mega-overview" data-theme-nav="overview" data-sub-target="sub-workforce-participation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-globe"/></svg><span><b>The big picture: workforce participation</b><small>Across all types of work, wage employment and self-employment alike</small></span></a>
             <div class="mega-col">
               <h4><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-briefcase"/></svg>Employment</h4>
               <ul>
@@ -1454,6 +1452,7 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
             <div class="mega-col">
               <h4><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-store"/></svg>Entrepreneurship</h4>
               <ul>
+                <li><a href="#" data-theme-nav="entrepreneurship" data-sub-target="sub-women-owned-enterprises"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-store"/></svg>Women-owned enterprises</a></li>
                 <li><a href="#" data-theme-nav="entrepreneurship" data-sub-target="sub-access-to-markets"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-basket"/></svg>Access to markets</a></li>
               </ul>
             </div>
@@ -1795,10 +1794,8 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
       <span class="page-eyebrow">Explore</span>
       <h1>Dashboards</h1>
       <p>Data, insights &amp; resources to help close India's workplace gender gap.</p>
-      <ul class="db-features" aria-hidden="true"><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-filter"/></svg>Filter</li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-compare"/></svg>Compare states</li><li><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-download"/></svg>Download data</li></ul>
       <div class="db-tabs">
-        <button class="db-tab active" data-tab="overview"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-globe"/></svg>Overview</button>
-        <button class="db-tab" data-tab="employment"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-briefcase"/></svg>Employment</button>
+        <button class="db-tab active" data-tab="employment"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-briefcase"/></svg>Employment</button>
         <button class="db-tab" data-tab="entrepreneurship"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-store"/></svg>Entrepreneurship</button>
         <button class="db-tab" data-tab="infrastructure" hidden data-hidden-reason="hidden 19 Nov 2026" style="display:none"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-layers"/></svg>Enabling Infrastructure</button>
       </div>
@@ -1806,58 +1803,8 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
 
     <div class="search-shell">
 
-      <!-- ============ OVERVIEW ============ -->
-      <div class="db-tab-panel active" id="tab-overview">
-
-        <div class="dbcard open">
-          <button class="dbcard-head" data-toggle>
-            <div class="dbcard-head-main"><span class="dbcard-tag">Overview</span><h3>PLFS Workforce Dashboard</h3><p>State-wise workforce by employment type &amp; gender — PLFS 2025, ages 15+</p></div>
-            <div class="dbcard-head-right">
-              <div class="dbcard-preview"><b>32.5%</b><span>Women's share of workforce</span></div>
-              <svg class="dbcard-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
-            </div>
-          </button>
-          <div class="dbcard-body">
-            <div class="dbcard-main">
-              <div class="dash-inset map-tall" id="db-plfs-inset">
-                <svg id="db-plfs-svg"></svg>
-                <div class="dash-tooltip"></div>
-                <div class="map-legend-box" style="width:auto;top:auto;bottom:14px;left:14px"><div class="map-legend-label">Women's share of workforce</div><div style="display:flex;gap:8px;flex-wrap:wrap;font-size:10.5px;color:var(--ink-dim);margin-top:4px"><span style="display:inline-flex;align-items:center;gap:4px"><i style="width:10px;height:10px;border-radius:2px;display:inline-block;background:var(--turmeric-500)"></i>&lt;25%</span><span style="display:inline-flex;align-items:center;gap:4px"><i style="width:10px;height:10px;border-radius:2px;display:inline-block;background:color-mix(in srgb, var(--indigo-500) 45%, #fff)"></i>25–32%</span><span style="display:inline-flex;align-items:center;gap:4px"><i style="width:10px;height:10px;border-radius:2px;display:inline-block;background:var(--indigo-500)"></i>33–39%</span><span style="display:inline-flex;align-items:center;gap:4px"><i style="width:10px;height:10px;border-radius:2px;display:inline-block;background:var(--indigo-900)"></i>40%+</span></div></div>
-              </div>
-              <div class="dash-metrics">
-                <div><b>61.6 Cr</b><span>Total workforce</span></div>
-                <div><b>32.5%</b><span>Women's share</span></div>
-              </div>
-              <p class="dash-caption">Self-employment is women's largest source of work: 12.6 Cr of the 20.1 Cr working women, or 63%. Within it, women are 60% of unpaid family helpers but just 7% of employers.</p>
-              <div class="dash-tags">
-                <span class="dash-tag">State-wise map</span>
-                <span class="dash-tag">Employment type breakdown</span>
-                <span class="dash-tag">Rural / urban split</span>
-              </div>
-              <a class="btn primary" href="https://theudaitifoundation-datahub.github.io/PLFS/" target="_blank" rel="noopener">Go to dashboard <svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            </div>
-            
-            <div class="dbcard-side">
-              <div class="mini-insight">
-                <div class="mini-insight-chart"><svg viewBox="0 0 100 60"><rect x="6" y="14" width="48.5" height="14" fill="var(--indigo-900)"/><rect x="54.5" y="14" width="22.1" height="14" fill="var(--turmeric-500)"/><rect x="76.6" y="14" width="17.4" height="14" fill="var(--khadi-300)"/><text x="6" y="42" font-size="7" fill="var(--ink-faint)">SE 55 · RW 25 · CL 20</text></svg></div>
-                <div><h4>Employment type mix</h4><p>Self-employment accounts for 55% of all work, ahead of regular-wage jobs (25%) and casual labour (20%).</p></div>
-              </div>
-              <div class="mini-insight">
-                <div class="mini-insight-chart"><svg viewBox="0 0 100 60"><rect x="6" y="12" width="45.4" height="10" rx="3" fill="var(--turmeric-500)"/><rect x="51.4" y="12" width="34.6" height="10" rx="3" fill="var(--khadi-300)"/><text x="6" y="36" font-size="7" font-weight="700" fill="var(--ink)">57% no contract</text><text x="6" y="47" font-size="6.5" fill="var(--ink-faint)">women, regular wage</text></svg></div>
-                <div><h4>Contract status</h4><p>57% of women in regular-wage jobs have no written contract, similar to 58% across all regular-wage workers.</p></div>
-              </div>
-              <div class="mini-insight">
-                <div class="mini-insight-chart"><svg viewBox="0 0 100 60"><rect x="6" y="10" width="71.5" height="9" rx="3" fill="var(--indigo-900)"/><text x="81.5" y="17.5" font-size="7" font-weight="700" fill="var(--ink)">40%</text><rect x="6" y="28" width="24.2" height="9" rx="3" fill="var(--turmeric-500)"/><text x="34.2" y="35.5" font-size="7" font-weight="700" fill="var(--ink)">14%</text><text x="6" y="52" font-size="6.5" fill="var(--ink-faint)">Chhattisgarh vs Delhi</text></svg></div>
-                <div><h4>Women's share by state</h4><p>Among larger states, women's share of the workforce ranges from 40% in Chhattisgarh to 14% in Delhi.</p></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
       <!-- ============ EMPLOYMENT ============ -->
-      <div class="db-tab-panel" id="tab-employment">
+      <div class="db-tab-panel active" id="tab-employment">
 
         <div class="dbcard open">
           <button class="dbcard-head" data-toggle>
@@ -1900,6 +1847,51 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
               <div class="mini-insight">
                 <div class="mini-insight-chart"><svg viewBox="0 0 100 60"><rect x="4.0" y="8.4" width="3" height="41.6" fill="var(--turmeric-500)"/><rect x="7.9" y="18.6" width="3" height="31.4" fill="var(--turmeric-500)"/><rect x="11.8" y="19.4" width="3" height="30.6" fill="var(--turmeric-500)"/><rect x="15.7" y="20.2" width="3" height="29.8" fill="var(--turmeric-500)"/><rect x="19.6" y="27.9" width="3" height="22.1" fill="var(--turmeric-500)"/><rect x="23.5" y="33.0" width="3" height="17.0" fill="var(--turmeric-500)"/><rect x="27.4" y="34.7" width="3" height="15.3" fill="var(--chart-grid)"/><rect x="31.3" y="36.4" width="3" height="13.6" fill="var(--chart-grid)"/><rect x="35.2" y="37.2" width="3" height="12.8" fill="var(--chart-grid)"/><rect x="39.1" y="37.2" width="3" height="12.8" fill="var(--chart-grid)"/><rect x="43.0" y="38.1" width="3" height="11.9" fill="var(--chart-grid)"/><rect x="46.9" y="39.0" width="3" height="11.0" fill="var(--chart-grid)"/><rect x="50.8" y="39.8" width="3" height="10.2" fill="var(--chart-grid)"/><rect x="54.7" y="40.6" width="3" height="9.3" fill="var(--chart-grid)"/><rect x="58.6" y="43.2" width="3" height="6.8" fill="var(--chart-grid)"/><rect x="62.5" y="44.0" width="3" height="6.0" fill="var(--chart-grid)"/><rect x="66.4" y="44.0" width="3" height="6.0" fill="var(--chart-grid)"/><rect x="70.3" y="44.9" width="3" height="5.1" fill="var(--chart-grid)"/><rect x="74.2" y="44.9" width="3" height="5.1" fill="var(--chart-grid)"/><rect x="78.1" y="45.8" width="3" height="4.2" fill="var(--chart-grid)"/><rect x="82.0" y="45.8" width="3" height="4.2" fill="var(--chart-grid)"/><rect x="85.9" y="45.8" width="3" height="4.2" fill="var(--chart-grid)"/><rect x="89.8" y="47.5" width="3" height="2.5" fill="var(--chart-grid)"/><rect x="93.7" y="48.3" width="3" height="1.7" fill="var(--chart-grid)"/><line x1="2" x2="98" y1="34.7" y2="34.7" stroke="var(--indigo-900)" stroke-dasharray="3,2" stroke-width="1"/></svg></div>
                 <div><h4>Few sectors above average</h4><p>Only 6 of 24 sectors are above the 18% all-company average, led by Hospitals and Labs, Textiles, Consumer Services and IT.</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="dbcard open">
+          <button class="dbcard-head" data-toggle>
+            <div class="dbcard-head-main"><span class="dbcard-tag">Employment</span><h3>PLFS Workforce Dashboard</h3><p>State-wise workforce by employment type &amp; gender — PLFS 2025, ages 15+</p></div>
+            <div class="dbcard-head-right">
+              <div class="dbcard-preview"><b>32.5%</b><span>Women's share of workforce</span></div>
+              <svg class="dbcard-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
+            </div>
+          </button>
+          <div class="dbcard-body">
+            <div class="dbcard-main">
+              <div class="dash-inset map-tall" id="db-plfs-inset">
+                <svg id="db-plfs-svg"></svg>
+                <div class="dash-tooltip"></div>
+                <div class="map-legend-box" style="width:auto;top:auto;bottom:14px;left:14px"><div class="map-legend-label">Women's share of workforce</div><div style="display:flex;gap:8px;flex-wrap:wrap;font-size:10.5px;color:var(--ink-dim);margin-top:4px"><span style="display:inline-flex;align-items:center;gap:4px"><i style="width:10px;height:10px;border-radius:2px;display:inline-block;background:var(--turmeric-500)"></i>&lt;25%</span><span style="display:inline-flex;align-items:center;gap:4px"><i style="width:10px;height:10px;border-radius:2px;display:inline-block;background:color-mix(in srgb, var(--indigo-500) 45%, #fff)"></i>25–32%</span><span style="display:inline-flex;align-items:center;gap:4px"><i style="width:10px;height:10px;border-radius:2px;display:inline-block;background:var(--indigo-500)"></i>33–39%</span><span style="display:inline-flex;align-items:center;gap:4px"><i style="width:10px;height:10px;border-radius:2px;display:inline-block;background:var(--indigo-900)"></i>40%+</span></div></div>
+              </div>
+              <div class="dash-metrics">
+                <div><b>61.6 Cr</b><span>Total workforce</span></div>
+                <div><b>32.5%</b><span>Women's share</span></div>
+              </div>
+              <p class="dash-caption">Self-employment is women's largest source of work: 12.6 Cr of the 20.1 Cr working women, or 63%. Within it, women are 60% of unpaid family helpers but just 7% of employers.</p>
+              <div class="dash-tags">
+                <span class="dash-tag">State-wise map</span>
+                <span class="dash-tag">Employment type breakdown</span>
+                <span class="dash-tag">Rural / urban split</span>
+              </div>
+              <a class="btn primary" href="https://theudaitifoundation-datahub.github.io/PLFS/" target="_blank" rel="noopener">Go to dashboard <svg class="icon" viewBox="0 0 24 24" style="width:14px;height:14px"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            </div>
+            
+            <div class="dbcard-side">
+              <div class="mini-insight">
+                <div class="mini-insight-chart"><svg viewBox="0 0 100 60"><rect x="6" y="14" width="48.5" height="14" fill="var(--indigo-900)"/><rect x="54.5" y="14" width="22.1" height="14" fill="var(--turmeric-500)"/><rect x="76.6" y="14" width="17.4" height="14" fill="var(--khadi-300)"/><text x="6" y="42" font-size="7" fill="var(--ink-faint)">SE 55 · RW 25 · CL 20</text></svg></div>
+                <div><h4>Employment type mix</h4><p>Self-employment accounts for 55% of all work, ahead of regular-wage jobs (25%) and casual labour (20%).</p></div>
+              </div>
+              <div class="mini-insight">
+                <div class="mini-insight-chart"><svg viewBox="0 0 100 60"><rect x="6" y="12" width="45.4" height="10" rx="3" fill="var(--turmeric-500)"/><rect x="51.4" y="12" width="34.6" height="10" rx="3" fill="var(--khadi-300)"/><text x="6" y="36" font-size="7" font-weight="700" fill="var(--ink)">57% no contract</text><text x="6" y="47" font-size="6.5" fill="var(--ink-faint)">women, regular wage</text></svg></div>
+                <div><h4>Contract status</h4><p>57% of women in regular-wage jobs have no written contract, similar to 58% across all regular-wage workers.</p></div>
+              </div>
+              <div class="mini-insight">
+                <div class="mini-insight-chart"><svg viewBox="0 0 100 60"><rect x="6" y="10" width="71.5" height="9" rx="3" fill="var(--indigo-900)"/><text x="81.5" y="17.5" font-size="7" font-weight="700" fill="var(--ink)">40%</text><rect x="6" y="28" width="24.2" height="9" rx="3" fill="var(--turmeric-500)"/><text x="34.2" y="35.5" font-size="7" font-weight="700" fill="var(--ink)">14%</text><text x="6" y="52" font-size="6.5" fill="var(--ink-faint)">Chhattisgarh vs Delhi</text></svg></div>
+                <div><h4>Women's share by state</h4><p>Among larger states, women's share of the workforce ranges from 40% in Chhattisgarh to 14% in Delhi.</p></div>
               </div>
             </div>
           </div>
@@ -2135,32 +2127,32 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
     <div class="quick-links">
       <div class="ql-label">Quick links</div>
       <div class="pill-row">
-        <a class="pill" href="#" data-theme-nav="overview" data-sub-target="sub-workforce-participation"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-globe"/></svg>Workforce participation</a>
         <a class="pill" href="#" data-theme-nav="employment" data-sub-target="sub-formal-and-informal-work"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-docok"/></svg>Formal and informal work</a>
         <a class="pill" href="#" data-theme-nav="employment" data-sub-target="sub-sectors-and-employers"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-factory"/></svg>Sectors and employers</a>
         <a class="pill" href="#" data-theme-nav="employment" data-sub-target="sub-pay-and-progression"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-coin"/></svg>Pay and progression</a>
         <a class="pill" href="#" data-theme-nav="employment" data-sub-target="sub-retention-and-attrition"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-hourglass"/></svg>Retention and attrition</a>
         <a class="pill" href="#" data-theme-nav="entrepreneurship" data-sub-target="sub-women-owned-enterprises"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-store"/></svg>Women-owned enterprises</a>
         <a class="pill" href="#" data-theme-nav="entrepreneurship" data-sub-target="sub-access-to-markets"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-basket"/></svg>Access to markets</a>
+        <a class="pill" href="#" data-theme-nav="infrastructure" data-sub-target="sub-safe-and-affordable-mobility"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-bus"/></svg>Safe and affordable mobility</a>
       </div>
     </div>
 
     <div class="search-shell insights-layout">
       <div class="theme-accordion">
-        <div class="theme-block open" data-theme-key="overview" style="--t-ink:var(--ink); --t-wash:var(--surface-sunken);">
+        <div class="theme-block open" data-theme-key="employment" style="--t-ink:var(--chart-line); --t-wash:var(--chart-fill);">
           <button class="theme-block-head" data-toggle>
             <div class="theme-block-head-l">
-              <span class="theme-block-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span>
-              <div><h2>The big picture</h2><p>Women's workforce participation across all types of work, wage employment and self-employment alike</p></div>
+              <span class="theme-block-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9l8-5 8 5v10"/><path d="M9 19v-6h6v6"/></svg></span>
+              <div><h2>Employment</h2><p>13 insights across 4 topics</p></div>
             </div>
             <div class="theme-block-head-r">
-              <span class="theme-block-count">1</span>
+              <span class="theme-block-count">13</span>
               <svg class="theme-block-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
             </div>
           </button>
           <div class="theme-block-body">
-          <div class="theme-subgroup" id="sub-workforce-participation">
-            <div class="theme-subgroup-head">Workforce participation<span class="theme-subgroup-count">1</span></div>
+          <div class="theme-subgroup" id="sub-formal-and-informal-work">
+            <div class="theme-subgroup-head">Formal and informal work<span class="theme-subgroup-count">5</span></div>
             <div class="theme-listing-grid">
             <button class="insight-card listing" data-modal="insight-1">
             <div class="insight-inset"><svg viewBox="0 0 200 140"><text x="6" y="8.0" font-size="7.5" fill="var(--ink-faint)">Below 10th</text><rect x="6" y="10.0" width="164.0" height="8.4" rx="2" fill="var(--chart-line)"/><text x="174.0" y="16.5" font-size="8" font-weight="700" fill="var(--ink)">50%</text><rect x="6" y="21.4" width="89.5" height="8.4" rx="2" fill="var(--turmeric-500)"/><text x="99.5" y="27.9" font-size="8" font-weight="700" fill="var(--ink)">27%</text><text x="6" y="37.8" font-size="7.5" fill="var(--ink-faint)">10th–Diploma</text><rect x="6" y="39.8" width="108.2" height="8.4" rx="2" fill="var(--chart-line)"/><text x="118.2" y="46.3" font-size="8" font-weight="700" fill="var(--ink)">33%</text><rect x="6" y="51.2" width="61.3" height="8.4" rx="2" fill="var(--turmeric-500)"/><text x="71.3" y="57.7" font-size="8" font-weight="700" fill="var(--ink)">19%</text><text x="6" y="67.6" font-size="7.5" fill="var(--ink-faint)">Graduate+</text><rect x="6" y="69.6" width="150.2" height="8.4" rx="2" fill="var(--chart-line)"/><text x="160.2" y="76.1" font-size="8" font-weight="700" fill="var(--ink)">46%</text><rect x="6" y="81.0" width="130.5" height="8.4" rx="2" fill="var(--turmeric-500)"/><text x="140.5" y="87.5" font-size="8" font-weight="700" fill="var(--ink)">40%</text><rect x="6" y="122" width="10" height="10" fill="var(--chart-line)" rx="2"/><text x="20" y="130.5" font-size="7.5" fill="var(--ink-dim)">Rural</text><rect x="58" y="122" width="10" height="10" fill="var(--turmeric-500)" rx="2"/><text x="72" y="130.5" font-size="7.5" fill="var(--ink-dim)">Urban</text></svg></div>
@@ -2171,25 +2163,6 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
               <span class="insight-more">Continue reading →</span>
             </div>
           </button>
-            </div>
-          </div>
-          </div>
-        </div>
-        <div class="theme-block open" data-theme-key="employment" style="--t-ink:var(--chart-line); --t-wash:var(--chart-fill);">
-          <button class="theme-block-head" data-toggle>
-            <div class="theme-block-head-l">
-              <span class="theme-block-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19V9l8-5 8 5v10"/><path d="M9 19v-6h6v6"/></svg></span>
-              <div><h2>Employment</h2><p>12 insights across 4 topics</p></div>
-            </div>
-            <div class="theme-block-head-r">
-              <span class="theme-block-count">12</span>
-              <svg class="theme-block-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="m6 9 6 6 6-6"/></svg>
-            </div>
-          </button>
-          <div class="theme-block-body">
-          <div class="theme-subgroup" id="sub-formal-and-informal-work">
-            <div class="theme-subgroup-head">Formal and informal work<span class="theme-subgroup-count">4</span></div>
-            <div class="theme-listing-grid">
             <button class="insight-card listing" data-modal="insight-secure-jobs-gap">
             <div class="insight-inset"><svg viewBox="0 0 200 140" role="img" aria-label="Per 100 people aged 15+: work, women 39 and men 77; salaried, women 7 and men 20; salaried with social security, women 3 and men 9"><rect x="6" y="4" width="8" height="8" rx="2" fill="var(--turmeric-500)"/><text x="18" y="11" font-size="7.5" fill="var(--ink-dim)">Women</text><rect x="52" y="4" width="8" height="8" rx="2" fill="var(--chart-line)"/><text x="64" y="11" font-size="7.5" fill="var(--ink-dim)">Men</text><text x="194" y="11" font-size="7" fill="var(--ink-faint)" text-anchor="end">per 100 aged 15+</text><text x="6" y="30" font-size="7.5" fill="var(--ink-faint)">Work</text><rect x="6" y="33" width="65.7" height="8" rx="2" fill="var(--turmeric-500)"/><text x="75.7" y="40" font-size="8" font-weight="700" fill="var(--ink)">39</text><rect x="6" y="43" width="129.7" height="8" rx="2" fill="var(--chart-line)"/><text x="139.7" y="50" font-size="8" font-weight="700" fill="var(--ink)">77</text><text x="6" y="70" font-size="7.5" fill="var(--accent-ink)" font-weight="700">Salaried job</text><rect x="6" y="73" width="12" height="8" rx="2" fill="var(--turmeric-500)"/><text x="22" y="80" font-size="8" font-weight="700" fill="var(--ink)">7</text><rect x="6" y="83" width="34.2" height="8" rx="2" fill="var(--chart-line)"/><text x="44.2" y="90" font-size="8" font-weight="700" fill="var(--ink)">20</text><text x="6" y="110" font-size="7.5" fill="var(--ink-faint)">Salaried + social security</text><rect x="6" y="113" width="5.1" height="8" rx="2" fill="var(--turmeric-500)"/><text x="15.1" y="120" font-size="8" font-weight="700" fill="var(--ink)">3</text><rect x="6" y="123" width="15.7" height="8" rx="2" fill="var(--chart-line)"/><text x="25.7" y="130" font-size="8" font-weight="700" fill="var(--ink)">9</text></svg></div>
             <div class="insight-text">
@@ -2390,15 +2363,7 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
       </div>
       <aside class="featured-work-panel" id="featured-work-panel">
         <h2>Featured Work</h2>
-        <div class="card promo-card dark fw-card" data-theme-card="overview">
-          <div class="promo-blob"></div>
-          <span class="promo-badge">New · July 2026</span>
-          <h3>6 in 10 women in regular jobs have <em>no written contract.</em></h3>
-          <p class="promo-sub">Without a contract, access to EPF, maternity benefits and legal recourse is much weaker.</p>
-          <div class="promo-meta">12 insights on India's working women, from PLFS 2025.</div>
-          <a class="promo-btn" href="https://www.udaiti.org/india-women-work" target="_blank" rel="noopener">Explore now <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
-        </div>
-        <div class="card promo-card dark fw-card" data-theme-card="employment" hidden>
+        <div class="card promo-card dark fw-card" data-theme-card="employment">
           <div class="promo-blob"></div>
           <span class="promo-badge">New · July 2026</span>
           <h3>6 in 10 women in regular jobs have <em>no written contract.</em></h3>
@@ -2642,11 +2607,6 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
 .sr-suggest .pill{ cursor:pointer; font:inherit; }
 #view-search .db-header::after{ display:none; content:none; }
 #view-search .db-header{ padding-bottom:20px; }
-.mega-overview{ grid-column:1/-1; display:flex; gap:12px; align-items:center; padding:12px 14px; border-radius:12px; background:var(--surface-sunken); color:var(--ink); text-decoration:none; }
-.mega-overview:hover{ background:var(--accent-wash); }
-.mega-overview .icon{ width:22px; height:22px; color:var(--chart-line); flex:none; }
-.mega-overview b{ display:block; font-size:14px; }
-.mega-overview small{ display:block; font-size:12px; color:var(--ink-dim); }
 .sr-fix{ color:var(--ink-dim); }
 .sr-fix b{ color:var(--ink); }
 .dh-explore{ display:block; margin-top:6px; padding:12px 16px; border-radius:10px; background:var(--surface-sunken); font-size:14px; line-height:1.6; }
