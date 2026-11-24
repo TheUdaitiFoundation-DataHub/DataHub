@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+<meta name="datahub-search-index" content="search-index.json">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#231f20">
@@ -3338,7 +3339,7 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
     html+='</div><p class="key"><span>Both charts use the same scale. Bars under 1% of the scale are drawn at a minimum width.</span><span><b>OAE</b> <span>own-account, no hired worker</span></span><span><b>HWE</b> <span>hires at least one worker</span> · % = share of that group</span></p>';
     host.innerHTML=html;
   }
-  INSIGHTS['insight-17']={title:"Women own 21.4 million enterprises. Only 0.6 million hire workers.",byline:"ASUSE 2025 · Enterprises by owner's sex and sector",chart:'<div class="as" id="as-host"></div>',initChart:function(){asuseInit(document.getElementById('as-host'));},body:["Across manufacturing, trade and other services, men own 53.5 million proprietary enterprises and women own 21.4 million, or 29% of the total 74.9 million. Only 3.0% of women-owned enterprises have hired workers (hired-worker establishments, or HWEs, in ASUSE terms), compared with 16.8% of men-owned enterprises.", "Manufacturing is the only sector where women own more enterprises than men: 12.9 million compared with 8.4 million. Yet only 1.2% (154 thousand) of women-owned manufacturing enterprises have hired workers, compared with 25% (2.1 million) of men-owned enterprises. This is the widest gap in hiring rates across the three sectors.", "In trade, men own more than six times as many enterprises as women. In other services, men own nearly five times as many enterprises.", "<b>Udaiti's Take —</b> Most women-owned enterprises remain micro or subsistence-driven, with only about 3% hiring workers, compared with 16.8% of men-owned enterprises. Many of these enterprises may be necessity-driven, reflecting limited wage employment opportunities, household income shocks and reliance on home-based work. Within this overall base of women-owned enterprises, growth-oriented female-owned enterprises (GoFEs) — enterprises with an established scale of operations, ambition and potential to grow — remain underserved due to gender inequities in access to finance, markets and growth support. Addressing these barriers can enable GoFEs to scale, driving greater investment, productivity and employment, particularly for women."]};
+  INSIGHTS['insight-17']={title:"Women own 21.4 million enterprises. Only 0.6 million hire workers.",byline:"ASUSE 2025 · Enterprises by owner's sex and sector",chart:'<div class="as" id="as-host"></div>',initChart:function(){asuseInit(document.getElementById('as-host'));},body:["Across manufacturing, trade and other services, men own 53.5 million proprietary enterprises and women own 21.4 million, or 29% of the total 74.9 million. Only 3.0% of women-owned enterprises have hired workers (hired-worker establishments, or HWEs, in ASUSE terms), compared with 16.8% of men-owned enterprises.", "Manufacturing is the only sector where women own more enterprises than men: 12.9 million compared with 8.4 million. Yet only 1.2% (154 thousand) of women-owned manufacturing enterprises have hired workers, compared with 25% (2.1 million) of men-owned enterprises. This is the widest gap in hiring rates across the three sectors.", "In trade, men own more than six times as many enterprises as women. In other services, men own nearly five times as many enterprises.", "<b>Udaiti's Take —</b> Most women-owned enterprises remain micro or subsistence-driven, with only about 3% hiring workers, compared with 16.8% of men-owned enterprises. Many of these enterprises may be necessity-driven, reflecting limited wage employment opportunities, household income shocks and reliance on home-based work. Within this overall base of women-owned enterprises, Growth-Oriented Women Enterprises (GoWEs) — enterprises with an established scale of operations, ambition and potential to grow — remain underserved due to gender inequities in access to finance, markets and growth support. Addressing these barriers can enable GoWEs to scale, driving greater investment, productivity and employment, particularly for women."]};
 
   /* ---- NEW — Insight 07: women in regular-wage work without a written contract (PLFS 2025) ---- */
 var I7_RESIZE_BOUND = false, I7_CURRENT = function(){ return 's7-a'; };
@@ -3787,7 +3788,7 @@ wrap.addEventListener('focusout',hide);
   var srFilters = document.getElementById('sr-filters'), srList = document.getElementById('sr-results');
   var THEME_NAMES = { overview:'The big picture', employment:'Employment', entrepreneurship:'Entrepreneurship', infrastructure:'Enabling Infrastructure' };
   var THEME_PAGES = ['employment','entrepreneurship','infrastructure'];
-  var TYPES = ['Dashboards','Insights','Themes'];
+  var TYPES = ['Dashboards','Insights','Research','Themes'];
   var SUGGEST = ['PLFS','EPFO','BRSR','Key management','Pay gap','Startup policy','Self-employment','Bus travel'];
   var state = { q:'', filter:'All', results:[], prev:null, corrected:[] };
 
@@ -3805,38 +3806,9 @@ wrap.addEventListener('focusout',hide);
     [/\bWB\b/g,' west bengal '],[/\bAP\b/g,' andhra pradesh '],[/\bMH\b/g,' maharashtra '],[/\bKA\b/g,' karnataka '],[/\bHP\b/g,' himachal pradesh '],
     [/\bJ\s*&\s*K\b/g,' jammu kashmir '],[/\bUTs?\b/g,' union territory ']
   ];
-  var SYN = [
-    ['kmp','key management personnel','key managerial personnel','key management','senior management','top management','leadership','executive','manager'],
-    ['board','board of directors','director','boardroom'],
-    ['lfpr','labour force participation','participation rate','participation'],
-    ['wage','pay','salary','earning','remuneration','income'],
-    ['pay gap','wage gap','gender pay gap','earnings gap','salary gap','income gap'],
-    ['epf','epfo','provident fund','payroll'],
-    ['formal','formal employment','formal job','formal sector','regular wage','salaried'],
-    ['contract','written contract','job contract'],
-    ['informal','informal work','casual','casual labour','unorganised','unorganized'],
-    ['social security','social protection','benefit','pension'],
-    ['startup','start up','founder','women led','entrepreneur','entrepreneurship'],
-    ['enterprise','establishment','business','msme','own account','self employed','self employment'],
-    ['company','corporate','listed','nse','brsr','firm','employer'],
-    ['mobility','transport','bus','travel','commute','fare'],
-    ['care','childcare','child care','unpaid care','creche','crèche','time use'],
-    ['maternity','maternity benefit','motherhood','childbirth','marriage'],
-    ['attrition','retention','quit','dropout','drop out','turnover','intend to leave'],
-    ['skill','skilling','training','iti','vocational','upskilling'],
-    ['manufacturing','factory','industry','industrial','blue collar'],
-    ['information technology','tech','software'],
-    ['bank','banking','financial services','finance'],
-    ['market','market access','buyer','procurement','customer'],
-    ['fiscal','funding','grant','credit','loan','capital','subsidy','allowance'],
-    ['plfs','periodic labour force survey','labour force survey'],
-    ['asuse','unincorporated','unincorporated sector'],
-    ['woman','women','female','girl'],['man','men','male'],
-    ['rural','village'],['urban','city'],
-    ['state','union territory'],
-    ['job','work','employment','employ','worker','workforce','labour'],
-    ['hire','hiring','recruit','recruitment']
-  ];
+  var DEFAULT_CFG = {"schema": "udaiti-datahub-search/1", "version": "2026-11-25.1", "generated": "2026-11-24", "notes": "Upload as /datahub/search-index.json. If this file is missing or invalid, the site falls back to its built-in copy.", "synonyms": [["kmp", "key management personnel", "key managerial personnel", "key management", "senior management", "top management", "leadership", "executive", "manager"], ["board", "board of directors", "director", "boardroom"], ["lfpr", "labour force participation", "participation rate", "participation"], ["wage", "pay", "salary", "earning", "remuneration", "income"], ["pay gap", "wage gap", "gender pay gap", "earnings gap", "salary gap", "income gap"], ["epf", "epfo", "provident fund", "payroll"], ["formal", "formal employment", "formal job", "formal sector", "regular wage", "salaried"], ["contract", "written contract", "job contract"], ["informal", "informal work", "casual", "casual labour", "unorganised", "unorganized"], ["social security", "social protection", "benefit", "pension"], ["startup", "start up", "founder", "women led", "entrepreneur", "entrepreneurship"], ["enterprise", "establishment", "business", "msme", "own account", "self employed", "self employment"], ["company", "corporate", "listed", "nse", "brsr", "firm", "employer"], ["mobility", "transport", "bus", "travel", "commute", "fare"], ["care", "childcare", "child care", "unpaid care", "creche", "time use"], ["maternity", "maternity benefit", "motherhood", "childbirth", "marriage"], ["attrition", "retention", "quit", "dropout", "drop out", "turnover", "intend to leave"], ["skill", "skilling", "training", "iti", "vocational", "upskilling"], ["manufacturing", "factory", "industry", "industrial", "blue collar"], ["information technology", "tech", "software"], ["bank", "banking", "financial services", "finance"], ["market", "market access", "buyer", "procurement", "customer"], ["fiscal", "funding", "grant", "credit", "loan", "capital", "subsidy", "allowance"], ["plfs", "periodic labour force survey", "labour force survey"], ["asuse", "annual survey of unincorporated sector enterprises", "unincorporated", "unincorporated sector"], ["woman", "women", "female", "girl"], ["man", "men", "male"], ["rural", "village"], ["urban", "city"], ["state", "union territory"], ["job", "work", "employment", "employ", "worker", "workforce", "labour"], ["hire", "hiring", "recruit", "recruitment", "hired worker"], ["data pack", "data story", "data stories", "report", "publication", "research"], ["hwe", "hired worker establishment"], ["oae", "own account establishment"], ["gowe", "growth oriented women enterprise"], ["gva", "gross value added", "productivity", "output"], ["registration", "registered", "udyam", "gst"], ["unpaid helper", "unpaid family", "family worker", "helper"], ["care economy", "domestic work", "personal services"]], "keywords": {"insight-1": ["education", "class 10", "diploma", "graduate", "blue collar", "entry level", "PLFS 2025", "rural", "urban", "participation"], "insight-secure-jobs-gap": ["salaried", "regular wage", "work participation", "per 100 women", "states", "Kerala", "Delhi"], "insight-no-contract": ["written contract", "informal", "social security", "EPF", "maternity benefit", "manufacturing", "domestic work", "education sector"], "insight-2": ["casual labour", "agriculture", "farm", "construction", "rural", "daily wage"], "insight-epf-subscribers": ["EPFO", "provident fund", "net subscribers", "new members", "formal employment", "age 26-28", "marriage"], "insight-it-banks": ["IT", "information technology", "banks", "sector concentration", "job growth", "CAGR", "listed companies", "BRSR"], "insight-3": ["manufacturing", "sub-sectors", "apparel", "textiles", "food", "auto", "chemicals", "pharma", "electronics", "electrical equipment", "priority sectors"], "insight-15": ["sector concentration", "hospitals", "textiles", "heavy industry", "representation", "BRSR"], "insight-14": ["college enrolment", "graduates", "large enterprises", "listed companies", "representation", "BRSR"], "insight-pay-gap": ["pay gap", "wage gap", "salary", "median remuneration", "BRSR", "listed companies"], "insight-board-kmp": ["board", "directors", "key management personnel", "KMP", "leadership", "CEO", "CFO", "company secretary", "mandate"], "insight-kmp-company-size": ["company size", "large companies", "key management personnel", "KMP", "leadership", "pipeline"], "insight-blue-grey-exit": ["attrition", "retention", "Quess", "survey", "blue collar", "grey collar", "intent to leave", "savings"], "insight-17": ["ASUSE", "enterprises", "female-headed", "women-owned", "hired workers", "HWE", "own account", "GoWEs", "manufacturing"], "insight-market-access": ["startup policy", "market access", "procurement", "buyers", "fiscal support", "women founders", "states"], "insight-mobility-fare": ["free bus travel", "fare", "transport", "mobility", "Shakti", "Mahalakshmi", "Delhi", "Karnataka", "Tamil Nadu", "states"], "dashboard:Women's Formal Employment Tracker": ["BRSR", "NSE", "listed companies", "sectors", "representation", "formal workforce", "CGG"], "dashboard:PLFS Workforce Dashboard": ["PLFS", "map", "states", "self employment", "regular wage", "casual labour", "contract", "workforce"], "dashboard:EPFO Tracker: Gendered Insights from Monthly EPFO Data": ["EPFO", "EPF", "provident fund", "payroll", "monthly", "age", "ceased", "rejoined", "retention"], "dashboard:State Startup Policy Index": ["startup policy", "women founders", "fiscal", "procurement", "incubation", "states", "index", "map"]}, "external": [{"id": "ext-asuse-data-pack", "type": "Research", "kind": "Data pack", "date": "10 Nov 2026", "title": "ASUSE 2025: A Snapshot of Female-headed Establishments in India", "url": "https://www.udaiti.org/ASUSE_Data_Pack_13.11.html", "theme": "Entrepreneurship", "authors": "Manya Aggarwal, Phalasha Nagpal and Gaurav Kumar Sinha", "summary": "Data pack: gender-disaggregated analysis of growth, sectors, states, registration and access to credit for India's 74.9 million unincorporated establishments, from ASUSE 2025.", "keywords": ["data pack", "data story", "ASUSE", "ASUSE 2025", "female-headed establishments", "women-owned enterprises", "GoWEs", "hired-worker establishments", "own-account establishments", "GVA", "registration", "institutional loans", "credit", "MoSPI"], "sections": [{"title": "Udaiti's take: growth and structure", "text": "Women own 28.6% of India's unincorporated non-agricultural establishments, but growth in numbers has not translated into scale. Most remain micro or subsistence-driven, with only about 3% as hired-worker establishments (HWEs), compared with about 17% of male-headed establishments. Growth-Oriented Women Enterprises (GoWEs) remain underserved due to gender inequities in access to finance, markets and growth support."}, {"title": "Insight 1.1: 28.6% of proprietary establishments are female-headed, yet few are hired-worker establishments", "text": "Within India's 74.9 million proprietary establishments, 21.4 million are female-headed. Only 3.0% of these are hired-worker establishments, against 16.8% of male-headed establishments. In manufacturing, female-headed establishments outnumber male-headed ones (12.9 million vs 8.4 million) but only 1.2% hire workers, the widest gap of any industry."}, {"title": "Insight 1.2: Female-headed establishments accounted for 45% of the net increase between 2022–23 and 2025", "text": "Female-headed establishments accounted for 4.5 million of the 10.0 million net increase. Nearly all new female-headed establishments are own-account; only 3.5% hire workers. 84.2% of new female-headed establishments are in six sectors: wearing apparel, retail trade, other personal services, education, textiles and tobacco products."}, {"title": "Insight 1.3: Female-headed hired-worker establishments generate 12.2 times the GVA of own-account ones", "text": "Female-headed HWEs average ₹8.3 lakh in gross value added (GVA), close to the ₹8.8 lakh of male-headed HWEs. Female-headed own-account establishments average ₹68.3 thousand, less than half the ₹1.8 lakh of male-headed OAEs."}, {"title": "Insight 1.4: Female-headed establishments hire fewer workers, but more of those hired are women", "text": "Female-headed establishments employ 26.3 million workers, of whom 6.8% are hired, against 26.4% in male-headed establishments. Women are 57.5% of their hired workforce, compared with 16.2% in male-headed establishments."}, {"title": "Udaiti's take: sectors", "text": "Female-headed establishments cluster where hiring is limited: wearing apparel, textiles and food products in manufacturing, retail rather than wholesale in trade, and own-account personal services. Cluster development, enterprise aggregation, value-chain linkages, buyer-supplier linkages, working capital and digital market access can help them scale."}, {"title": "Insight 2.1: The gender gap in the share of hired-worker establishments barely narrowed", "text": "The HWE share fell for both female-headed (3.4% to 3.0%) and male-headed establishments (18.0% to 16.8%); the gap narrowed only because the male-headed share fell faster."}, {"title": "Insight 2.2: Six in ten female-headed establishments are in manufacturing", "text": "Female-headed establishments accounted for nine in ten new manufacturing establishments, led by wearing apparel, textiles and tobacco products."}, {"title": "Insight 2.3: About one in seven female-headed establishments is in trade, mostly retail", "text": "Retail trade holds 98.1% of female-headed trade establishments, but only 3.5% hire workers; in wholesale trade 37.1% are HWEs."}, {"title": "Insight 2.4: About one in four female-headed establishments is in other services", "text": "Other personal service activities added 2.0 million female-headed establishments; education and food and beverage services also grew. Accommodation and human health have the most female-headed HWEs."}, {"title": "Udaiti's take: states", "text": "The states with the most female-headed establishments are not the ones where they hire workers, calling for context-specific, gender-responsive state strategies."}, {"title": "Insight 3.1: States with the most female-headed establishments differ from those with hired-worker establishments", "text": "West Bengal has the most female-headed establishments (3.6 million); Maharashtra, Tamil Nadu and Kerala lead on female-headed HWEs. Bihar, Uttar Pradesh, Rajasthan and Jharkhand sit below the national rate per 1,000 working-age women."}, {"title": "Insight 3.2: A larger female-headed base does not ensure more hiring", "text": "West Bengal has the largest female-headed base, yet only 0.9% are HWEs. Tamil Nadu, Kerala, Maharashtra, Haryana and Assam combine a large base with an above-median HWE share."}, {"title": "Udaiti's take: registration and credit", "text": "Female-headed establishments hold smaller institutional loans in most worker-size categories. Barriers include information gaps, lack of collateral and guarantors, informality, and credit products that do not fit women's needs."}, {"title": "Insight 4.1: Female-headed own-account establishments have low registration rates", "text": "Only 3.7% of female-headed manufacturing OAEs are registered (GST, Udyam and other registrations), against 23.3% of male-headed OAEs. Among hired-worker establishments the gap is smaller, and female-headed establishments lead in trade and other services."}, {"title": "Insight 4.2: Female-headed own-account establishments hold smaller institutional loans", "text": "Among OAEs with institutional loans, female-headed manufacturing establishments hold ₹50.1 thousand on average, against ₹1.6 lakh for male-headed. In other services, male-headed HWEs with 15+ workers hold ₹88.0 lakh against ₹28.5 lakh."}, {"title": "Conclusion", "text": "The constraint on women's enterprise lies less in the number of establishments than in their ability to scale. Targeted, bundled and gender-responsive interventions anchored in state governments or in a committed market actor can help women entrepreneurs scale."}]}, {"id": "ext-india-women-work", "type": "Research", "kind": "Data story", "date": "July 2026", "title": "Where are India's Working Women? Trends, gaps and opportunities", "url": "https://www.udaiti.org/india-women-work", "theme": "Employment", "authors": "Shailesh Agarwal and Karthick M P", "summary": "Data story: 12 insights from PLFS 2025 on women's participation, earnings, job quality and the sectors where targeted intervention can bring more women into work.", "keywords": ["data story", "data pack", "PLFS", "PLFS 2025", "working women", "LFPR", "participation", "earnings", "no written contract", "unpaid helpers", "casual labour", "priority sectors", "care economy"], "sections": [{"title": "Insight 01: Participation gap is narrowing in rural areas, unchanged in urban areas", "text": "Rural women's labour force participation rate (LFPR) rose from 37.5% to 45.9% between 2022 and 2025. Urban women's participation stayed below 30%. Closing the urban gap requires changes in hiring, childcare and mobility."}, {"title": "Insight 02: Young women stay out of the labour force", "text": "Female LFPR rises sharply after 30 in both rural and urban areas. Marriage, caregiving and the absence of safe, affordable infrastructure keep younger women out. Pathways include support for young women migrating for work and hyperlocal economic opportunities."}, {"title": "Insight 03: Women qualified for entry-level blue-collar jobs have the lowest participation", "text": "Women with education between Class 10 and a diploma are overqualified for casual work and underrepresented in formal hiring."}, {"title": "Insight 04: Where rural and urban women work tells two different stories", "text": "Rural women are mostly self-employed, much of it unpaid family labour in agriculture. Urban women are more likely to be in regular wage work."}, {"title": "Insight 05: Rural women are concentrated in less productive roles", "text": "In self-employment and casual labour most women work in agriculture; in regular wage employment women are concentrated in services. Enterprise formation, FPOs and cooperatives are opportunities."}, {"title": "Insight 06: Women earn less than men in every employment type", "text": "In regular wage work women earn ₹18,353 a month against men's ₹24,217. In self-employment women earn ₹6,374 against ₹17,914. In casual labour women earn 31% less per day (₹315 vs ₹455)."}, {"title": "Insight 07: 57% of women in regular wage jobs have no written contract", "text": "A written contract is the basis for EPF, maternity benefit, minimum wage enforcement and grievance redressal. Household domestic services, education, manufacturing (2.67 million), trade and health have the most no-contract women. Wearing apparel, textiles and food lead within manufacturing."}, {"title": "Insight 08: 114 million self-employed women, nearly half work without pay", "text": "India has 113.7 million women in self-employment: 1.4 million employers, 62.2 million own-account workers and 50.1 million unpaid helpers. Unpaid helpers have no provisions in the new labour codes."}, {"title": "Insight 09: Of 31 million women in casual labour, two-thirds work in agriculture", "text": "90% of women casual workers are rural; agriculture employs 67% and construction 24%. Collective organising, legal literacy and wage transparency can improve conditions."}, {"title": "Insight 10: Eight manufacturing sub-sectors for targeted intervention", "text": "Food, apparel, textiles, auto, chemicals, pharma, electrical equipment and electronics are priority sub-sectors, based on growth, women's share and conducive conditions. Manufacturing clusters reduce the cost of intervention."}, {"title": "Insight 11: Knowledge-intensive services", "text": "Women are a majority in education (53%) and human health (56%), but 29% in computer programming and 21% in financial services, which is growing at 13% a year."}, {"title": "Insight 12: Labour-intensive services are growing fast with few women", "text": "Retail trade (18% women), accommodation (22% annual growth), warehousing and logistics (13% women) and personal services (64% women) are priority sub-sectors; formalising the care economy is a direct opportunity."}]}]};
+  var CFG = DEFAULT_CFG;
+  var SYN = CFG.synonyms;
   function deaccent(s){ return String(s).normalize('NFKD').replace(/[̀-ͯ]/g,''); }
   function stem(w){
     if(w==='labor') return 'labour'; if(w==='organization'||w==='organisation') return 'organis';
@@ -3855,8 +3827,27 @@ wrap.addEventListener('focusout',hide);
     return s.toLowerCase().replace(/[’']s\b/g,'').replace(/[^a-z0-9%]+/g,' ').split(' ').filter(function(w){ return w && (keepStop || !STOP[w]); });
   }
   function stemStr(s){ return words(s,false).map(stem).join(' '); }
-  var SYN_MAP = {};  // stemmed phrase -> group index
-  var SYN_GROUPS = SYN.map(function(g,gi){ var m=g.map(stemStr).filter(Boolean); m.forEach(function(p){ (SYN_MAP[p]=SYN_MAP[p]||[]).push(gi); }); return m; });
+  var SYN_MAP = {}, SYN_GROUPS = [];  // stemmed phrase -> group index
+  function setSyn(list){ SYN_MAP={}; SYN_GROUPS=list.map(function(g,gi){ var m=g.map(stemStr).filter(Boolean); m.forEach(function(p){ (SYN_MAP[p]=SYN_MAP[p]||[]).push(gi); }); return m; }); }
+  setSyn(SYN);
+  // ---- search configuration file (synonyms, keywords, external research). Falls back to DEFAULT_CFG. ----
+  function validCfg(c){
+    if(!c || c.schema!=='udaiti-datahub-search/1' || !Array.isArray(c.synonyms) || typeof c.keywords!=='object' || !Array.isArray(c.external)) return false;
+    if(!c.synonyms.every(function(g){ return Array.isArray(g) && g.every(function(x){ return typeof x==='string'; }); })) return false;
+    return c.external.every(function(x){ return x && typeof x.title==='string' && /^https:\/\//.test(x.url||''); });
+  }
+  var cfgReady=null;
+  function loadCfg(){
+    if(cfgReady) return cfgReady;
+    var meta=document.querySelector('meta[name="datahub-search-index"]'), url=meta?meta.getAttribute('content'):'';
+    if(!url || location.protocol==='file:' || !window.fetch){ cfgReady=Promise.resolve(); return cfgReady; }
+    cfgReady=fetch(url,{cache:'no-cache',credentials:'same-origin'}).then(function(r){ return r.ok?r.json():null; })
+      .then(function(c){ if(validCfg(c)){ CFG=c; setSyn(c.synonyms); window.DATAHUB_SEARCH_VERSION=c.version; } else if(c){ console.warn('DataHub search: index file invalid, using built-in copy'); } })
+      .catch(function(){});
+    return cfgReady;
+  }
+  window.DATAHUB_SEARCH_VERSION=DEFAULT_CFG.version+' (built-in)';
+  loadCfg();
   function lev(a,b,max){
     if(Math.abs(a.length-b.length)>max) return max+1;
     var prev=[],cur,i,j; for(j=0;j<=b.length;j++) prev[j]=j;
@@ -3866,13 +3857,13 @@ wrap.addEventListener('focusout',hide);
       if(best>max) return max+1; prev=cur; }
     return prev[b.length];
   }
-  var FIELDS=[['t',2.2],['s',1.5],['b',1]];
+  var FIELDS=[['t',2.2],['k',2],['s',1.5],['b',1]];
   function prepDocs(idx){
     var vocab={}, df={}, surf={};
     idx.forEach(function(r){
-      words(r.title+' '+r.sum+' '+r.body,false).forEach(function(w){ var s=stem(w); if(!surf[s]||w.length<surf[s].length) surf[s]=w; });
-      r._t=' '+stemStr(r.title)+' '; r._s=' '+stemStr(r.sum+' '+r.meta+' '+(r.source||''))+' '; r._b=' '+stemStr(r.body)+' ';
-      var seen={}; (r._t+r._s+r._b).split(' ').forEach(function(w){ if(w){ vocab[w]=1; if(!seen[w]){ seen[w]=1; df[w]=(df[w]||0)+1; } } });
+      words(r.title+' '+(r.kw||'')+' '+r.sum+' '+r.body,false).forEach(function(w){ var s=stem(w); if(!surf[s]||w.length<surf[s].length) surf[s]=w; });
+      r._k=' '+stemStr(r.kw||'')+' '; r._t=' '+stemStr(r.title)+' '; r._s=' '+stemStr(r.sum+' '+r.meta+' '+(r.source||''))+' '; r._b=' '+stemStr(r.body)+' ';
+      var seen={}; (r._t+r._k+r._s+r._b).split(' ').forEach(function(w){ if(w){ vocab[w]=1; if(!seen[w]){ seen[w]=1; df[w]=(df[w]||0)+1; } } });
     });
     return {vocab:vocab, df:df, N:idx.length, surf:surf};
   }
@@ -3957,7 +3948,7 @@ wrap.addEventListener('focusout',hide);
       idx.push({type:'Insights', key:k, title:txt(c.querySelector('h3'))||strip(d.title), sum:txt(c.querySelector('.insight-text p')),
         meta:[blk?THEME_NAMES[blk.getAttribute('data-theme-key')]:'', subName].filter(Boolean).join(' · '),
         source:txt(c.querySelector('.insight-date')), thumb: svg ? svg.outerHTML : '',
-        body:[strip(d.title), strip(d.byline), (d.body||[]).map(strip).join(' ')].join(' '), snip:(d.body||[]).map(strip).join(' ')});
+        body:[strip(d.title), strip(d.byline), (d.body||[]).map(strip).join(' ')].join(' '), snip:(d.body||[]).map(strip).join(' '), kw:(CFG.keywords[k]||[]).join(' ')});
     });
     document.querySelectorAll('.db-tab-panel').forEach(function(p){
       if(p.hidden) return;
@@ -3966,10 +3957,18 @@ wrap.addEventListener('focusout',hide);
         if(card.hidden) return;
         if(!card.id) card.id='dbcard-'+tab+'-'+i;
         var link=card.querySelector('.dbcard-main a.btn[href^="http"]');
-        idx.push({type:'Dashboards', tab:tab, id:card.id, title:txt(card.querySelector('.dbcard-head h3')), sum:txt(card.querySelector('.dbcard-head-main p')),
+        var dTitle=txt(card.querySelector('.dbcard-head h3'));
+        idx.push({type:'Dashboards', tab:tab, id:card.id, title:dTitle, kw:(CFG.keywords['dashboard:'+dTitle]||[]).join(' '), sum:txt(card.querySelector('.dbcard-head-main p')),
           meta:THEME_NAMES[tab]||'', href: link ? link.getAttribute('href') : '',
           body:[txt(card.querySelector('.dash-caption'))].concat([].map.call(card.querySelectorAll('.mini-insight'), txt)).join(' ')});
       });
+    });
+    (CFG.external||[]).forEach(function(x){
+      var secs=x.sections||[];
+      idx.push({type:'Research', key:x.id, title:x.title, sum:x.summary||'', meta:[x.kind, x.theme].filter(Boolean).join(' · '),
+        source:[x.date, 'udaiti.org'].filter(Boolean).join(' · '), href:x.url, kw:(x.keywords||[]).join(' '),
+        body:[x.authors||''].concat(secs.map(function(s){ return s.title+'. '+s.text; })).join(' '),
+        snip:secs.map(function(s){ return s.title+': '+s.text; }).join(' ')});
     });
     THEME_PAGES.forEach(function(k){
       var v=document.getElementById('view-theme-'+k); if(!v) return;
@@ -3985,7 +3984,8 @@ wrap.addEventListener('focusout',hide);
   }
   var ICON = {
     Dashboards:'<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
-    Themes:'<svg class="icon" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg>'
+    Themes:'<svg class="icon" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg>',
+    Research:'<svg class="icon" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h7M9 9h3"/></svg>'
   };
   function render(){
     var q=state.q, all=state.results;
@@ -4008,12 +4008,12 @@ wrap.addEventListener('focusout',hide);
       var i=all.indexOf(r);
       if(state.filter==='All' && r.type!==last){ html+='<h2 class="sr-group">'+r.type+'</h2>'; last=r.type; }
       var thumb = r.type==='Insights' && r.thumb ? r.thumb : '<span class="sr-ico">'+(ICON[r.type]||'')+'</span>';
-      var action = r.type==='Insights' ? 'Read insight' : r.type==='Dashboards' ? 'View dashboard card' : 'Open theme page';
+      var action = r.type==='Insights' ? 'Read insight' : r.type==='Dashboards' ? 'View dashboard card' : r.type==='Research' ? 'Open '+(r.meta.split(' · ')[0]||'research').toLowerCase()+' on udaiti.org ↗' : 'Open theme page';
       html+='<article class="sr-item"><button type="button" class="sr-open" data-i="'+i+'"><span class="sr-thumb'+(r.type!=='Insights'?' sr-thumb-ico':'')+'">'+thumb+'</span>'+
-        '<span class="sr-body"><span class="sr-kicker"><b>'+r.type.replace(/s$/,'')+'</b>'+(r.meta?' · '+esc(r.meta):'')+(r.source?' · '+esc(r.source):'')+'</span>'+
+        '<span class="sr-body"><span class="sr-kicker"><b>'+(r.type==='Research'?'Featured research':r.type.replace(/s$/,''))+'</b>'+(r.meta?' · '+esc(r.meta):'')+(r.source?' · '+esc(r.source):'')+'</span>'+
         '<span class="sr-title">'+markText(r.title,r._hits||[])+'</span><span class="sr-snip">'+markText(snippetFor(r,r._hits||[]),r._hits||[])+'</span>'+
-        '<span class="sr-more">'+action+' &rarr;</span></span></button>'+
-        (r.href?'<a class="sr-ext" href="'+esc(r.href)+'" target="_blank" rel="noopener">Open full dashboard <svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>':'')+'</article>';
+        '<span class="sr-more">'+action+(r.type==='Research'?'':' &rarr;')+'</span></span></button>'+
+        (r.href && r.type==='Dashboards'?'<a class="sr-ext" href="'+esc(r.href)+'" target="_blank" rel="noopener">Open full dashboard <svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>':'')+'</article>';
     });
     srList.innerHTML=html;
   }
@@ -4025,6 +4025,7 @@ wrap.addEventListener('focusout',hide);
     q=(q||'').trim();
     if(document.querySelector('.view.active') && document.querySelector('.view.active').id!=='view-search') state.prev=activeViewKey();
     state.q=q; state.filter='All'; state.results=run(q);
+    if(cfgReady && !state._cfgWaited){ state._cfgWaited=true; cfgReady.then(function(){ if(state.q===q){ state.results=run(q); render(); } }); }
     if(typeof restoreThemeMoves==='function') restoreThemeMoves();
     document.querySelectorAll('.view').forEach(function(v){ v.classList.remove('active'); });
     view.classList.add('active'); window.scrollTo({top:0,behavior:'instant'});
@@ -4051,6 +4052,7 @@ wrap.addEventListener('focusout',hide);
         card.classList.remove('ds-flash'); void card.offsetWidth; card.classList.add('ds-flash');
       },120);
     } else if(r.type==='Themes'){ showThemeView(r.theme); }
+    else if(r.type==='Research' && /^https:\/\//.test(r.href||'')){ window.open(r.href,'_blank','noopener'); }
   }
   navForm.addEventListener('submit', function(e){ e.preventDefault(); var q=navInput.value.trim(); if(!q){ navInput.focus(); return; } navInput.blur(); showResults(q,true); });
   srForm.addEventListener('submit', function(e){ e.preventDefault(); showResults(srInput.value,true); });
