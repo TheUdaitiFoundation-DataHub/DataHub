@@ -1481,7 +1481,7 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
           <div class="subscribe-pop" id="sub-pop">
             <h4><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg>Insights in your inbox</h4>
             <label class="sub-check"><input type="checkbox" checked><span><b><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg>Udaiti Newsletter</b>A monthly roundup of Udaiti's research, initiatives &amp; updates.</span></label>
-            <label class="sub-check"><input type="checkbox"><span><b><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pulse"/></svg>WEE Monitor</b>The latest data &amp; trends on women's economic empowerment.</span></label>
+            <label class="sub-check"><input type="checkbox" checked><span><b><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pulse"/></svg>WEE Monitor</b>The latest data &amp; trends on women's economic empowerment.</span></label>
             <form>
               <input type="email" placeholder="you@organisation.org">
               <button class="btn accent sm" type="submit">Subscribe</button>
@@ -1647,7 +1647,7 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
         <h4><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg>Insights in your inbox</h4>
         <p class="hsc-sub">Get the latest data, insights &amp; updates on women's economic empowerment.</p>
         <label class="sub-check"><input type="checkbox" checked><span><b><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-mail"/></svg>Udaiti Newsletter</b>A monthly roundup of Udaiti's research, initiatives &amp; updates.</span></label>
-        <label class="sub-check"><input type="checkbox"><span><b><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pulse"/></svg>WEE Monitor</b>The latest data &amp; trends on women's economic empowerment.</span></label>
+        <label class="sub-check"><input type="checkbox" checked><span><b><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-pulse"/></svg>WEE Monitor</b>The latest data &amp; trends on women's economic empowerment.</span></label>
         <form>
           <input type="email" placeholder="you@organisation.org">
           <button class="btn accent sm" type="submit">Subscribe</button>
@@ -2633,6 +2633,8 @@ footer.sitefoot .foot-bottom .legal{ align-items:center; }
 .sr-suggest .pill{ cursor:pointer; font:inherit; }
 #view-search .db-header::after{ display:none; content:none; }
 #view-search .db-header{ padding-bottom:20px; }
+.sr-fix{ color:var(--ink-dim); }
+.sr-fix b{ color:var(--ink); }
 .dh-explore{ display:block; margin-top:6px; padding:12px 16px; border-radius:10px; background:var(--surface-sunken); font-size:14px; line-height:1.6; }
 .dh-explore a{ color:var(--link); font-weight:600; }
 .ds-flash{ animation:dsFlash 1.6s ease; }
@@ -3812,7 +3814,7 @@ wrap.addEventListener('focusout',hide);
   var THEME_NAMES = { employment:'Employment', entrepreneurship:'Entrepreneurship', infrastructure:'Enabling Infrastructure' };
   var TYPES = ['Dashboards','Insights','Themes'];
   var SUGGEST = ['PLFS','EPFO','BRSR','Key management','Pay gap','Startup policy','Self-employment','Bus travel'];
-  var state = { q:'', filter:'All', results:[], prev:null };
+  var state = { q:'', filter:'All', results:[], prev:null, corrected:[] };
 
   function txt(el){ return el ? el.textContent.replace(/\s+/g,' ').trim() : ''; }
   function strip(h){ var d=document.createElement('div'); d.innerHTML=h||''; return d.textContent.replace(/\s+/g,' ').trim(); }
@@ -3820,6 +3822,154 @@ wrap.addEventListener('focusout',hide);
   function norm(s){ return ' '+String(s).toLowerCase().normalize('NFKD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9%₹.]+/g,' ')+' '; }
   function has(h,t){ return h.indexOf(' '+t)>=0; }
   function insightsObj(){ try{ return INSIGHTS; }catch(e){ return {}; } }
+  /* ---------- relevance engine ---------- */
+  var STOP = {};
+  'a an the of in on at for and or to with by from is are was were be been how what which who whom where when why do does did many much more most than that this these those it its into about across vs per show me find any all some there their'.split(' ').forEach(function(w){ STOP[w]=1; });
+  var CASE_EXPAND = [ // case-sensitive abbreviations, expanded before lower-casing
+    [/\bIT\b/g,' information technology '],[/\bUP\b/g,' uttar pradesh '],[/\bMP\b/g,' madhya pradesh '],[/\bTN\b/g,' tamil nadu '],
+    [/\bWB\b/g,' west bengal '],[/\bAP\b/g,' andhra pradesh '],[/\bMH\b/g,' maharashtra '],[/\bKA\b/g,' karnataka '],[/\bHP\b/g,' himachal pradesh '],
+    [/\bJ\s*&\s*K\b/g,' jammu kashmir '],[/\bUTs?\b/g,' union territory ']
+  ];
+  var SYN = [
+    ['kmp','key management personnel','key managerial personnel','key management','senior management','top management','leadership','executive','manager'],
+    ['board','board of directors','director','boardroom'],
+    ['lfpr','labour force participation','participation rate','participation'],
+    ['wage','pay','salary','earning','remuneration','income'],
+    ['pay gap','wage gap','gender pay gap','earnings gap','salary gap','income gap'],
+    ['epf','epfo','provident fund','payroll'],
+    ['formal','formal employment','formal job','formal sector','regular wage','salaried'],
+    ['contract','written contract','job contract'],
+    ['informal','informal work','casual','casual labour','unorganised','unorganized'],
+    ['social security','social protection','benefit','pension'],
+    ['startup','start up','founder','women led','entrepreneur','entrepreneurship'],
+    ['enterprise','establishment','business','msme','own account','self employed','self employment'],
+    ['company','corporate','listed','nse','brsr','firm','employer'],
+    ['mobility','transport','bus','travel','commute','fare'],
+    ['care','childcare','child care','unpaid care','creche','crèche','time use'],
+    ['maternity','maternity benefit','motherhood','childbirth','marriage'],
+    ['attrition','retention','quit','dropout','drop out','turnover','intend to leave'],
+    ['skill','skilling','training','iti','vocational','upskilling'],
+    ['manufacturing','factory','industry','industrial','blue collar'],
+    ['information technology','tech','software'],
+    ['bank','banking','financial services','finance'],
+    ['market','market access','buyer','procurement','customer'],
+    ['fiscal','funding','grant','credit','loan','capital','subsidy','allowance'],
+    ['plfs','periodic labour force survey','labour force survey'],
+    ['asuse','unincorporated','unincorporated sector'],
+    ['woman','women','female','girl'],['man','men','male'],
+    ['rural','village'],['urban','city'],
+    ['state','union territory'],
+    ['job','work','employment','employ','worker','workforce','labour'],
+    ['hire','hiring','recruit','recruitment']
+  ];
+  function deaccent(s){ return String(s).normalize('NFKD').replace(/[̀-ͯ]/g,''); }
+  function stem(w){
+    if(w==='labor') return 'labour'; if(w==='organization'||w==='organisation') return 'organis';
+    if(w.length<=3 || /^\d/.test(w)) return w;
+    if(/ies$/.test(w) && w.length>4) return w.slice(0,-3)+'y';
+    if(/(ss|us|is)$/.test(w)) return w;
+    if(/ment$/.test(w) && w.length>=9) return w.slice(0,-4);
+    if(/ing$/.test(w) && w.length>5) { w=w.slice(0,-3); return /(.)\1$/.test(w)? w.slice(0,-1) : w; }
+    if(/ed$/.test(w) && w.length>4) { w=w.slice(0,-2); return /(.)\1$/.test(w)? w.slice(0,-1) : w; }
+    if(/(ches|shes|xes|sses)$/.test(w)) return w.slice(0,-2);
+    if(/s$/.test(w)) return w.slice(0,-1);
+    return w;
+  }
+  function words(s, keepStop){
+    s=deaccent(s); CASE_EXPAND.forEach(function(r){ s=s.replace(r[0],r[1]); });
+    return s.toLowerCase().replace(/[’']s\b/g,'').replace(/[^a-z0-9%]+/g,' ').split(' ').filter(function(w){ return w && (keepStop || !STOP[w]); });
+  }
+  function stemStr(s){ return words(s,false).map(stem).join(' '); }
+  var SYN_MAP = {};  // stemmed phrase -> group index
+  var SYN_GROUPS = SYN.map(function(g,gi){ var m=g.map(stemStr).filter(Boolean); m.forEach(function(p){ (SYN_MAP[p]=SYN_MAP[p]||[]).push(gi); }); return m; });
+  function lev(a,b,max){
+    if(Math.abs(a.length-b.length)>max) return max+1;
+    var prev=[],cur,i,j; for(j=0;j<=b.length;j++) prev[j]=j;
+    for(i=1;i<=a.length;i++){ cur=[i]; var best=i;
+      for(j=1;j<=b.length;j++){ cur[j]=Math.min(prev[j]+1,cur[j-1]+1,prev[j-1]+(a[i-1]===b[j-1]?0:1));
+        if(i>1&&j>1&&a[i-1]===b[j-2]&&a[i-2]===b[j-1]) cur[j]=Math.min(cur[j],prev[j-2]+1); if(cur[j]<best) best=cur[j]; }
+      if(best>max) return max+1; prev=cur; }
+    return prev[b.length];
+  }
+  var FIELDS=[['t',2.2],['s',1.5],['b',1]];
+  function prepDocs(idx){
+    var vocab={}, df={}, surf={};
+    idx.forEach(function(r){
+      words(r.title+' '+r.sum+' '+r.body,false).forEach(function(w){ var s=stem(w); if(!surf[s]||w.length<surf[s].length) surf[s]=w; });
+      r._t=' '+stemStr(r.title)+' '; r._s=' '+stemStr(r.sum+' '+r.meta+' '+(r.source||''))+' '; r._b=' '+stemStr(r.body)+' ';
+      var seen={}; (r._t+r._s+r._b).split(' ').forEach(function(w){ if(w){ vocab[w]=1; if(!seen[w]){ seen[w]=1; df[w]=(df[w]||0)+1; } } });
+    });
+    return {vocab:vocab, df:df, N:idx.length, surf:surf};
+  }
+  // turn the query into concepts; each concept = list of {p: stemmed phrase, w: weight}
+  function concepts(q, ctx){
+    var toks=words(q,false).map(stem), out=[], corrected=[], i=0;
+    while(i<toks.length){
+      var took=0;
+      for(var n=Math.min(4,toks.length-i);n>=2 && !took;n--){
+        var ph=toks.slice(i,i+n).join(' ');
+        if(SYN_MAP[ph]){ out.push(expand(ph,[ph])); i+=n; took=1; }
+      }
+      if(took) continue;
+      var t=toks[i++], members=[t];
+      if(!ctx.vocab[t] && !SYN_MAP[t] && t.length>=4 && !/^\d/.test(t)){
+        var max=t.length>=8?2:1, best=[], bd=max+1;
+        Object.keys(ctx.vocab).forEach(function(v){ if(v.length<3) return; var d=lev(t,v,max); if(d<bd){ bd=d; best=[v]; } else if(d===bd && d<=max) best.push(v); });
+        if(bd<=max){ best=best.sort(function(a,b){ return (ctx.df[b]||0)-(ctx.df[a]||0); }).slice(0,3); corrected.push(ctx.surf[best[0]]||best[0]); members=members.concat(best); }
+      }
+      out.push(expand(t,members));
+    }
+    return {list:out, corrected:corrected};
+    function expand(key, members){
+      var m=members.map(function(p,k){ return {p:p,w:k===0?1:0.8}; });
+      members.forEach(function(p){ (SYN_MAP[p]||[]).forEach(function(gi){ SYN_GROUPS[gi].forEach(function(s){ if(!m.some(function(x){ return x.p===s; })) m.push({p:s,w:0.45}); }); }); });
+      return {key:key, members:m};
+    }
+  }
+  function idf(ctx,p){ var w=p.split(' '), d=Infinity; w.forEach(function(x){ d=Math.min(d, ctx.df[x]||0); }); if(w.length>1) d=d/2; return Math.log(1+ctx.N/(1+d)); }
+  function rank(idx, q){
+    var ctx=prepDocs(idx), C=concepts(q,ctx), K=C.list.length; if(!K) return {results:[], corrected:[]};
+    var nq=' '+stemStr(q)+' ';
+    var res=idx.map(function(r){
+      var score=0, covered=0, hits={};
+      C.list.forEach(function(c){
+        var best=0;
+        c.members.forEach(function(m){
+          var needle=' '+m.p+' ';
+          FIELDS.forEach(function(f){
+            if(r['_'+f[0]].indexOf(needle)>=0){ var v=f[1]*m.w*idf(ctx,m.p); if(v>best) best=v; hits[m.p]=1; }
+          });
+        });
+        if(best>0){ covered++; score+=best; }
+      });
+      if(!covered) return null;
+      var cov=covered/K;
+      if(K<=2 ? cov<1 : cov<0.6) return null;
+      if(nq.trim().split(' ').length>1){ if(r._t.indexOf(nq)>=0) score+=4; else if((r._s+r._b).indexOf(nq)>=0) score+=1.5; }
+      score*=(0.4+0.6*cov);
+      return {r:r, score:score, hits:Object.keys(hits)};
+    }).filter(Boolean).sort(function(a,b){ return b.score-a.score; });
+    return {results:res, corrected:C.corrected};
+  }
+  function markText(s, hits){
+    var set={}, phr=[]; hits.forEach(function(h){ h.split(' ').forEach(function(w){ set[w]=1; }); });
+    return esc(s).replace(/[A-Za-z0-9%][A-Za-z0-9%’'\-]*/g, function(w){
+      var parts=words(w,true); return parts.length && parts.some(function(p){ return set[stem(p)]; }) ? '<mark>'+w+'</mark>' : w;
+    });
+  }
+  function snippetFor(r, hits){
+    var set={}; hits.forEach(function(h){ h.split(' ').forEach(function(w){ set[w]=1; }); });
+    var inSum=words(r.sum,true).some(function(w){ return set[stem(w)]; });
+    var src=r.sum;
+    var body=r.snip||r.body;
+    if(!inSum && body){
+      var re=/[A-Za-z0-9%][A-Za-z0-9%’'\-]*/g, m, pos=-1;
+      while((m=re.exec(body))){ if(words(m[0],true).some(function(p){ return set[stem(p)]; })){ pos=m.index; break; } }
+      if(pos>=0){ var a=Math.max(0,body.lastIndexOf(' ',Math.max(0,pos-90))); src=(a>0?'…':'')+body.slice(a,pos+170).trim()+'…'; }
+    }
+    if(src.length>240) src=src.slice(0,237)+'…';
+    return src;
+  }
 
   function buildIndex(){
     var idx=[], seen={}, INS=insightsObj();
@@ -3831,7 +3981,7 @@ wrap.addEventListener('focusout',hide);
       idx.push({type:'Insights', key:k, title:txt(c.querySelector('h3'))||strip(d.title), sum:txt(c.querySelector('.insight-text p')),
         meta:[blk?THEME_NAMES[blk.getAttribute('data-theme-key')]:'', subName].filter(Boolean).join(' · '),
         source:txt(c.querySelector('.insight-date')), thumb: svg ? svg.outerHTML : '',
-        body:[strip(d.title), strip(d.byline), (d.body||[]).map(strip).join(' ')].join(' ')});
+        body:[strip(d.title), strip(d.byline), (d.body||[]).map(strip).join(' ')].join(' '), snip:(d.body||[]).map(strip).join(' ')});
     });
     document.querySelectorAll('.db-tab-panel').forEach(function(p){
       if(p.hidden) return;
@@ -3852,44 +4002,21 @@ wrap.addEventListener('focusout',hide);
     return idx;
   }
   function run(q){
-    var terms=norm(q).trim().split(/\s+/).filter(Boolean), nq=norm(q).trim();
-    if(!terms.length) return [];
-    var O={Dashboards:0,Insights:1,Themes:2};
-    return buildIndex().map(function(r){
-      var T=norm(r.title), S=norm(r.sum+' '+r.meta+' '+(r.source||'')), B=norm(r.body), score=0;
-      for(var i=0;i<terms.length;i++){
-        var t=terms[i], hit=has(T,t)?6:has(S,t)?3:has(B,t)?1:0;
-        if(!hit) return null; score+=hit;
-      }
-      if(T.indexOf(nq)>=0) score+=5;
-      return {r:r,score:score};
-    }).filter(Boolean).sort(function(a,b){ return (O[a.r.type]-O[b.r.type])||(b.score-a.score); }).map(function(x){ return x.r; });
-  }
-  function hl(s, terms){
-    var out=esc(s);
-    terms.forEach(function(t){ if(t.length<2) return; out=out.replace(new RegExp('(?<![A-Za-z0-9])('+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+')','ig'),'<mark>$1</mark>'); });
-    return out;
-  }
-  function snippet(r, terms){
-    var src=r.sum, n=norm(src);
-    if(!terms.some(function(t){ return has(n,t); }) && r.body){
-      var nb=r.body.toLowerCase(), pos=-1;
-      terms.some(function(t){ pos=nb.search(new RegExp('(^|[^a-z0-9])'+t.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'))); return pos>=0; });
-      if(pos>=0){ var a=Math.max(0,pos-80); src=(a>0?'…':'')+r.body.slice(a,pos+160)+'…'; }
-    }
-    if(src.length>230) src=src.slice(0,227)+'…';
-    return src;
+    var R=rank(buildIndex(), q); state.corrected=R.corrected;
+    var groupBest={}; R.results.forEach(function(x){ groupBest[x.r.type]=Math.max(groupBest[x.r.type]||0,x.score); });
+    return R.results.sort(function(a,b){ return a.r.type===b.r.type ? b.score-a.score : (groupBest[b.r.type]-groupBest[a.r.type]); })
+      .map(function(x){ x.r._hits=x.hits; return x.r; });
   }
   var ICON = {
     Dashboards:'<svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>',
     Themes:'<svg class="icon" viewBox="0 0 24 24"><path d="M12 3 3 8l9 5 9-5-9-5Z"/><path d="m3 13 9 5 9-5"/></svg>'
   };
   function render(){
-    var q=state.q, terms=norm(q).trim().split(/\s+/).filter(Boolean), all=state.results;
+    var q=state.q, all=state.results;
     var counts={All:all.length}; TYPES.forEach(function(t){ counts[t]=all.filter(function(r){ return r.type===t; }).length; });
     if(state.filter!=='All' && !counts[state.filter]) state.filter='All';
     srTitle.innerHTML = q ? 'Results for “'+esc(q)+'”' : 'Search DataHub';
-    srSub.textContent = q ? (all.length ? all.length+' result'+(all.length>1?'s':'')+' across dashboards, insights and themes' : 'No matches found') : 'Search across every dashboard, insight and theme page.';
+    srSub.innerHTML = q ? (all.length ? all.length+' result'+(all.length>1?'s':'')+', most relevant first'+(state.corrected&&state.corrected.length?' · <span class="sr-fix">Including results for <b>'+esc(state.corrected.join(', '))+'</b></span>':'') : 'No matches found') : 'Search across every dashboard, insight and theme page.';
     srInput.value=q; navInput.value=q;
     srFilters.innerHTML = all.length ? ['All'].concat(TYPES).filter(function(t){ return t==='All'||counts[t]; }).map(function(t){
       return '<button type="button" class="sr-chip'+(state.filter===t?' active':'')+'" data-f="'+t+'" aria-pressed="'+(state.filter===t)+'">'+t+' <span>'+counts[t]+'</span></button>';
@@ -3908,7 +4035,7 @@ wrap.addEventListener('focusout',hide);
       var action = r.type==='Insights' ? 'Read insight' : r.type==='Dashboards' ? 'View dashboard card' : 'Open theme page';
       html+='<article class="sr-item"><button type="button" class="sr-open" data-i="'+i+'"><span class="sr-thumb'+(r.type!=='Insights'?' sr-thumb-ico':'')+'">'+thumb+'</span>'+
         '<span class="sr-body"><span class="sr-kicker"><b>'+r.type.replace(/s$/,'')+'</b>'+(r.meta?' · '+esc(r.meta):'')+(r.source?' · '+esc(r.source):'')+'</span>'+
-        '<span class="sr-title">'+hl(r.title,terms)+'</span><span class="sr-snip">'+hl(snippet(r,terms),terms)+'</span>'+
+        '<span class="sr-title">'+markText(r.title,r._hits||[])+'</span><span class="sr-snip">'+markText(snippetFor(r,r._hits||[]),r._hits||[])+'</span>'+
         '<span class="sr-more">'+action+' &rarr;</span></span></button>'+
         (r.href?'<a class="sr-ext" href="'+esc(r.href)+'" target="_blank" rel="noopener">Open full dashboard <svg class="icon" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></svg></a>':'')+'</article>';
     });
